@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 export class CategoriasProvider {
 private PATH = 'categorias/';
 
-  constructor(private db:AngularFireDatabase) { 
+  constructor(private db:AngularFireDatabase) {
   }
 
   public getAll(){
@@ -22,12 +22,23 @@ get(){
 
 }
 
-save(){
+save(categoriaForm: any){
+const categoria ={
+name: categoriaForm.name,
+description: categoriaForm.description
+}
+
+if(categoriaForm.key){
+  //editar um existente//
+  }else {
+    //salvar um novo//
+    this.db.list(this.PATH).push(categoria);
+  }
   
 }
 
-remove(){
-  
+remove(categoriakey: string){
+this.db.list(this.PATH).remove(categoriakey);
 }
 
 }
