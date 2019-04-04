@@ -42,6 +42,7 @@ import { ProdutosProvider } from '../providers/produtos/produtos';
     CategoriasProvider,
     ProdutosProvider,
     CategoriasProvider,
+    ProdutosProvider,
     ProdutosProvider
   ]
 })

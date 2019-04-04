@@ -5,7 +5,6 @@ import { CategoriasProvider } from './../../../providers/categorias/categorias';
 
 
 
-
 @IonicPage()
 @Component({
   selector: 'page-categorias-edita',
@@ -24,14 +23,27 @@ form:FormGroup;
 
 
   this.categoria = this.navParams.data.categoriakey || {}
+  console.log(this.categoria);
   this.SetupPageTitle();
-  this.createForms();
-    }
-  private SetupPageTitle(){
+  this.createForm();
 
+  const subscribe = this.categoriaProvider.get(this.navParams.data.categoriakey).subscribe(categoriaData => {
+    subscribe.unsubscribe();
+    this.categoria = categoriaData;
+     console.log(this.categoria);
+     this.createForm();
+  })
   }
 
-  private createForms(){
+  private SetupPageTitle(){
+    if(this.navParams.data.categoriakey){
+    this.title="Alterando categoria";
+    } else {
+      this.title="Nova categoria";
+      }
+  }
+
+  private createForm(){
     this.form = this.formBuilder.group({
       key:[this.categoria.key],
       name:[this.categoria.name, Validators.required],
